@@ -13,31 +13,39 @@ Invece di usare prompt e allerte usate inputs ed elementi della dom per mostrare
 // ------------------------------------------------------ dichiarazioni elementi della dom
 let boxNumberCasual = document.querySelector('.number_casual');
 const btnPlay = document.querySelector('.play')
-const allInputEl = 
+const btnVerifica = document.querySelector('.verifica')
+
+
 
 // aggiungiamo classi ad elementi della dom
 document.querySelector('.number_casual').classList.add('d-flex', 'justify-content-center', 'align-items-center')
 
 // creiamo un array con all'interno 5 numeri casuali
 let casualNumber = [];
-
+let arrayUserNumber = []
 // Diamo una funzione al tasto play per generare 5 numeri casuali
-btnPlay.addEventListener('click', function() {
+btnPlay.addEventListener('click', function () {
     boxNumberCasual.innerHTML = ""
+    // richiamiamo la funzone per generare i numeri
     const casualNumber = generateRandomNumber(10, 1)
     for (i = 0; i < casualNumber.length; i++) {
         thisNumb = casualNumber[i]
         console.log(thisNumb)
         boxNumberCasual.innerHTML += (`<span class="px-3 fs-1">${thisNumb}</span>`)
     }
+    // funzione per nascondere i numeri
+    setTimeout(dNone,2900)
+    // funzione di verifica dei numeri
+    setTimeout(Verifica, 3000)
+
 })
 
-// richiamiamo la funzone per generare i numeri
 
 
-    // richiamiamo la funzione per generare 5 numeri casuali
-// creiamo una funzoine che faccia vedere per 30 secondi i numeri nella dom
+// fiamo funzione al tasto verifica
+/* btnVerifica.addEventListener('click', function(){
 
+}) */
 
 
 
@@ -62,16 +70,24 @@ function generateRandomNumber(max, min) {
             casualNumber.push(numbRandom)
         }
     }
-    return(casualNumber)
-
+    return (casualNumber)
 }
 
-
-function takeNumbToUser() {
- // array dei numeri dell'user
-  let arreyUser = []
-
-  while (arreyUser.length < )
-
+function dNone() {
+    boxNumberCasual.classList.add('d-none')
 }
 
+function Verifica() {
+    let arrayUserNumber = []
+    while (arrayUserNumber.length < 5) {
+        const userNumber = Number(prompt('inserisci i numeri appena visti'))
+        if (!arrayUserNumber.includes(userNumber)) {
+            arrayUserNumber.push(userNumber)
+        } else {
+            alert('numero gia inserito!!!')
+        }
+        console.log(arrayUserNumber)
+    }
+    if (arrayUserNumber == casualNumber)
+    return arrayUserNumber
+}
