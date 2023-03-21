@@ -2,3 +2,7 @@
 .col {
     height: 100px;
 }
+
+.w_5 {
+    width: calc(100% / 5);
+}

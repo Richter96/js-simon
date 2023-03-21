@@ -11,34 +11,32 @@ Invece di usare prompt e allerte usate inputs ed elementi della dom per mostrare
  */
 
 // ------------------------------------------------------ dichiarazioni elementi della dom
-const boxNumberCasual = document.querySelector('.number_casual');
+let boxNumberCasual = document.querySelector('.number_casual');
+const btnPlay = document.querySelector('.play')
+const allInputEl = 
 
+// aggiungiamo classi ad elementi della dom
+document.querySelector('.number_casual').classList.add('d-flex', 'justify-content-center', 'align-items-center')
 
 // creiamo un array con all'interno 5 numeri casuali
 let casualNumber = [];
 
-generateRandomNumber(100, 1)
-for (i = 0; i < casualNumber.length; i++) {
-    thisNumb = casualNumber[i]
-    console.log(thisNumb)
-    boxNumberCasual.innerHTML += (`<span clas="px-1">${thisNumb}</span>`)
+// Diamo una funzione al tasto play per generare 5 numeri casuali
+btnPlay.addEventListener('click', function() {
+    boxNumberCasual.innerHTML = ""
+    const casualNumber = generateRandomNumber(10, 1)
+    for (i = 0; i < casualNumber.length; i++) {
+        thisNumb = casualNumber[i]
+        console.log(thisNumb)
+        boxNumberCasual.innerHTML += (`<span class="px-3 fs-1">${thisNumb}</span>`)
+    }
+})
 
-}
+// richiamiamo la funzone per generare i numeri
+
 
     // richiamiamo la funzione per generare 5 numeri casuali
 // creiamo una funzoine che faccia vedere per 30 secondi i numeri nella dom
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -52,15 +50,28 @@ for (i = 0; i < casualNumber.length; i++) {
 
 
 // creo una funzione per generare 5 numeri casuali
+
+
 function generateRandomNumber(max, min) {
-    let n = 0
+    // creiamo un array con all'interno 5 numeri casuali
+    let casualNumber = [];
+
     while (casualNumber.length < 5) {
         numbRandom = Math.ceil(Math.random() * (max - min + 1)) + min;
         if (!casualNumber.includes(numbRandom)) {
             casualNumber.push(numbRandom)
         }
-        n++
     }
+    return(casualNumber)
+
+}
+
+
+function takeNumbToUser() {
+ // array dei numeri dell'user
+  let arreyUser = []
+
+  while (arreyUser.length < )
 
 }
 

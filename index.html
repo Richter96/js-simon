@@ -19,8 +19,21 @@
     </header>
     <main>
         <div class="container-sm text-center">
-            <div class="col border border-1 number_casual py-2"></div>
-            <div class="col border border-1 input_numb"></div>
+            <div class="col border border-1 number_casual d-none"></div>
+            <div class="col border border-1 input_numb d-flex">
+                <button class="play w-auto m-auto rounded-2">Gioca</button>
+                <div class="col-10 d-flex flex-column">
+                    <label for="number"> INSERISCI I NUMERI</label>
+                    <div class="d-flex">
+                        <input type="number" id="number1" class="w_5 m-2">
+                        <input type="number" id="number1" class="w_5 m-2">
+                        <input type="number" id="number1" class="w_5 m-2">
+                        <input type="number" id="number1" class="w_5 m-2">
+                        <input type="number" id="number1" class="w_5 m-2">
+                    </div>
+                </div>
+                <button class="check w-auto m-auto rounded-2 bg-light">Verifica</button>
+            </div>
         </div>
     </main>
 
