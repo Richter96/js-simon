@@ -96,12 +96,16 @@ function promptUserNumber() {
     return (arrayUserNumber)
 }
 
-function verifica(arrayUserNumber, casualNumber) {
-    const numGiusti = []
+// funzone di verifica
+function verifica(numbUser, pcNumb) {
 
-    for (i = 0; i < arrayUserNumber.length; i++) {
-        thisarra1 = array1[i]
-        if (thisarra1.includes(casualNumber)) {
+    // dichiaro la costante che conterrà i numeri indovinati
+    const numGiusti = []
+    // creo un loop per riprendere i numeri generati dall'utente
+    for (i = 0; i < numbUser.length; i++) {
+        thisusernumb = array1[i]
+        console.log(thisusernumb)
+        if (pcNumb.includes(thisusernumb)) {
             numGiusti.push(thisarra1)
         }
     }
