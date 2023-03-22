@@ -11,9 +11,10 @@ Invece di usare prompt e allerte usate inputs ed elementi della dom per mostrare
  */
 
 // ------------------------------------------------------ dichiarazioni elementi della dom
-let boxNumberCasual = document.querySelector('.number_casual');
+const boxNumberCasual = document.querySelector('.number_casual');
+const boxinput = document.querySelector('.input_numb');
+
 const btnPlay = document.querySelector('.play')
-const btnVerifica = document.querySelector('.check')
 
 
 // aggiungiamo classi ad elementi della dom
@@ -21,28 +22,27 @@ document.querySelector('.number_casual').classList.add('d-flex', 'justify-conten
 
 // creiamo un array con all'interno 5 numeri casuali
 let casualNumber = [];
-let arrayUserNumber = []
+let userNumber = []
 // Diamo una funzione al tasto play per generare 5 numeri casuali
 btnPlay.addEventListener('click', function () {
-
+    dNone(btnPlay)
     //reset box number
     boxNumberCasual.innerHTML = ""
     // richiamiamo la funzone per generare i numeri
-    const casualNumber = generateRandomNumber(10, 1)
+    casualNumber = generateRandomNumber(100, 1)
     console.log(casualNumber)
     // funzione per nascondere i numeri
-    setTimeout(dNone, 2900)
     // funzione di chiedere i numeri all'utente
-    setTimeout(promptUserNumber, 3000)
+    setTimeout(() => {
+        dNone(boxNumberCasual)
+        setTimeout(() => {
+            promptUserNumber(userNumber)
+            console.log(userNumber)
+            verifica(userNumber, casualNumber)
+        }, 100);
 
+    }, 3000);
 })
-
-// diamo funzione al tasto verifica
-btnVerifica.addEventListener('click', function () {
-    const numeriGiusti = verifica(arrayUserNumber, casualNumber)
-    console.log(numeriGiusti)
-})
-
 
 
 
@@ -65,7 +65,7 @@ function generateRandomNumber(max, min) {
     let casualNumber = [];
 
     while (casualNumber.length < 5) {
-        numbRandom = Math.ceil(Math.random() * (max - min + 1)) + min;
+        numbRandom = Math.ceil(Math.random() * (max - min)) + 1;
         if (!casualNumber.includes(numbRandom)) {
             casualNumber.push(numbRandom)
         }
@@ -75,40 +75,57 @@ function generateRandomNumber(max, min) {
         // console.log(thisNumb)
         boxNumberCasual.innerHTML += (`<span class="px-3 fs-1">${thisNumb}</span>`)
     }
-    return (casualNumber)
+    return casualNumber
+}
+// funzione per nascondere degli elementi
+function dNone(elementDomNone) {
+    elementDomNone.classList.add('d-none')
 }
 
-function dNone() {
-    boxNumberCasual.classList.add('d-none')
+// funzione per stampare degli elementi in dom
+function printToDome(whereInDome, markupEl) {
+    whereInDome.insertAdjacentHTML('beforeend', markupEl)
 }
 
-function promptUserNumber() {
-    let arrayUserNumber = []
-    while (arrayUserNumber.length < 5) {
-        const userNumber = Number(prompt('inserisci i numeri appena visti'))
-        if (!arrayUserNumber.includes(userNumber)) {
-            arrayUserNumber.push(userNumber)
+function promptUserNumber(arrayUser) {
+    while (arrayUser.length < 5) {
+        const userNumber = parseInt(prompt('inserisci i numeri appena visti'))
+        if (!arrayUser.includes(userNumber)) {
+            arrayUser.push(userNumber)
         } else {
             alert('numero gia inserito!!!')
         }
     }
-    console.log(arrayUserNumber)
-    return (arrayUserNumber)
+    return (arrayUser)
 }
+num1 = [
+    '1',
+    '2',
+    '3'
+]
+num2 = [
+    '1',
+    '4',
+    '5'
+]
 
 // funzone di verifica
-function verifica(numbUser, pcNumb) {
+function verifica(userNumb, pcNumb) {
 
+    console.log('verifica--numero user', userNumb)
+    console.log('verifica--numero pc', pcNumb)
     // dichiaro la costante che conterrà i numeri indovinati
     const numGiusti = []
     // creo un loop per riprendere i numeri generati dall'utente
-    for (i = 0; i < numbUser.length; i++) {
-        thisusernumb = array1[i]
-        console.log(thisusernumb)
-        if (pcNumb.includes(thisusernumb)) {
-            numGiusti.push(thisarra1)
+    for (let i = 0; i < userNumb.length; i++) {
+        thisUserNumb = userNumb[i]
+        console.log(thisUserNumb)
+        if (pcNumb.includes(thisUserNumb)) {
+            numGiusti.push(thisUserNumb)
         }
     }
-    console.log(numGiusti)
-    return (numGiusti)
+    console.log('ver, numeri giusti', numGiusti)
+
+    const markupCheck = `<h3>Hai indovinato ${numGiusti.length} numeri: ${numGiusti}</h3>`
+    printToDome(boxinput, markupCheck)
 }
